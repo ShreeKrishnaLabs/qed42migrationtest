@@ -1,0 +1,76 @@
+<?php
+
+/*
+ * Implements hook_entity_info()
+ */
+function custom_city_data_entity_info() {
+
+  $city_data['city_data'] = array(
+    'label' => t('City Entity'),
+    'entity class' => 'Entity',
+    'controller class' => 'EntityAPIController',
+    'base table' => 'city_data',
+    'fieldable' => TRUE,
+    'entity keys' => array( 
+      'id' => 'city_data_id',
+      'label' => 'name',
+      'bundle' => 'type',
+    ),
+    'view modes' => array(
+      'full' => array(
+        'label' => t('Default'),
+        'custom settings' => FALSE,
+      ),
+    ),
+    'bundle keys' => array(
+      'bundle' => 'type',
+     ),
+    'bundles' => array(// define the bundles in the entity
+      'city_main' => array(
+          'label' => t('city_main', array(), array('context' => 'city main bundle'))
+        ),
+    ),
+    'module' => 'custom_city_data',
+    'metadata controller class' => 'CustomCityDataMetadataController',
+    'views controller class' => 'EntityDefaultViewsController',
+    'load hook' => 'city_data_load', //custom entity load function, which is described below
+  );
+ 
+  return $city_data;
+}
+
+
+
+/**
+ * Loads a city by ID.
+ */
+function city_data_load($city_id) {
+  if (empty($city_id)) {
+    return FALSE;
+  }
+  $city = city_data_load_multiple(array($city_id), array());
+  return $city ? reset($city) : FALSE;
+}
+
+/**
+ * Loads multiple training by ID or based on a set of matching conditions.
+ */
+function city_data_load_multiple($city_ids = array(), $conditions = array(), $reset = FALSE){
+  if (empty($city_ids) && empty($conditions)) {
+    return array();
+  }
+  return entity_load('city_data', $city_ids, $conditions, $reset);
+}
+
+
+/**
+ * Returns an initialized city object. Used to create an entity of type city_data.
+ */
+function city_data_new() {
+  return entity_get_controller('city_data')->create();
+}
+
+
+
+
+

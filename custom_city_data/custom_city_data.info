@@ -1,0 +1,12 @@
+name = Custom Entity For Cities
+description = Custom Entity for Cities and other parameters.
+
+files[] = includes/custom_city_data.inc
+files[] = custom_city_data.install
+
+dependencies[] = entity
+dependencies[] = entityreference
+version = "7.x-1.0"
+core = "7.x"
+
+

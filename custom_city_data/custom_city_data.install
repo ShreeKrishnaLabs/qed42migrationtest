@@ -1,0 +1,91 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the custom_city_data module.
+ *
+ * Implements hook_schema().
+ */
+function custom_city_data_schema() {
+  $schema['city_data'] = array(
+    'description' => 'The base table for city data.',
+    'fields' => array(
+      'city_data_id' => array(
+        'description' => 'The primary identifier for a city data.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+        'city_id' => array(
+        'description' => 'The Identifier for a city data.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+       'created' => array(
+        'description' => 'The Unix timestamp when the data was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'updated' => array(
+        'description' => 'The Unix timestamp when the data was most recently saved.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+     'title' => array(
+        'description' => 'The title of this data, always treated as non-markup plain text.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'city' => array(
+        'description' => 'The city of this data.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'state' => array(
+        'description' => 'The city of this data, always treated as non-markup plain text.',
+        'type' => 'varchar',
+        'length' => 2,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'lat' => array(
+       'description' => 'Stores the latitude value',
+       'type' => 'float',
+       'size' => 'big',
+       'not null' => TRUE,
+       'default' => 0,
+      ),
+      'lng' => array(
+        'description' => 'Stores the longitude value',
+        'type' => 'float',
+        'size' => 'big',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'pop' => array(
+       'description' => 'Stores the POP value',
+       'type' => 'int',
+       'size' => 'big',
+       'not null' => TRUE,
+       'default' => 0,
+      ),
+      'type' => array(
+        'description' => 'The type of this bundle.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+    ),
+    'primary key' => array('city_data_id'),
+  );
+ 
+  return $schema;
+}
